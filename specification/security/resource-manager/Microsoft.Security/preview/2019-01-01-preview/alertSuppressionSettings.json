@@ -1,0 +1,337 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/alertSuppressionSettings": {
+      "get": {
+        "x-ms-examples": {
+          "Get alert suppression settings for subscription": {
+            "$ref": "./examples/AlertSuppressionSettings/GetAlertSuppressionSettings_example.json"
+          }
+        },
+        "tags": [
+          "AlertSuppressionSettings"
+        ],
+        "description": "List all the alert suppression settings that are associated with the subscription",
+        "operationId": "AlertSuppressionSettings_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertSuppressionSettingsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/alertSuppressionSettings/{alertSuppressionSettingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get alert suppression setting for subscription": {
+            "$ref": "./examples/AlertSuppressionSettings/GetAlertSuppressionSetting_example.json"
+          }
+        },
+        "tags": [
+          "AlertSuppressionSettings"
+        ],
+        "description": "Get suppression setting, with name: {alertSuppressionSettingName}, associated with the subscription",
+        "operationId": "AlertSuppressionSettings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AlertSuppressionSettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertSuppressionSetting"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update alert suppression setting for subscription": {
+            "$ref": "./examples/AlertSuppressionSettings/UpdateAlertSuppressionSetting_example.json"
+          }
+        },
+        "tags": [
+          "AlertSuppressionSettings"
+        ],
+        "description": "update existing alert suppression setting or create new one if not exist",
+        "operationId": "AlertSuppressionSettings_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AlertSuppressionSettingName"
+          },
+          {
+            "$ref": "#/parameters/AlertSuppressionSetting"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertSuppressionSetting"
+            }
+          },
+          //some filed is missing , trying to update last modified date ...
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a alert suppression setting data for a subscription": {
+            "$ref": "./examples/AlertSuppressionSettings/DeleteAlertSuppressionSetting_example.json"
+          }
+        },
+        "tags": [
+          "AlertSuppressionSettings"
+        ],
+        "description": "Deletes alert suppression setting for this subscription.",
+        "operationId": "AlertSuppressionSettings_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AlertSuppressionSettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlertSuppressionSettingsList": {
+      "type": "object",
+      "description": "Suppression settings list for subscription.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The suppression settings list.",
+          "items": {
+            "$ref": "#/definitions/AlertSuppressionSetting"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "AlertSuppressionSetting": {
+      "type": "object",
+      "description": "Represents an alert suppression setting",
+      "properties": { //Why double ??
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertSuppressionSettingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AlertSuppressionSettingProperties": {
+      "type": "object",
+      "description": "describes alert suppression setting properties.",
+      "properties": {
+        "alertType": {
+          "type": "string",
+          "description": "Type of the suppressed alert"
+        },
+        "lastModified": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time this setting was modified"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time", //can be restricted to 6m?
+          "description": "The time until the setting will be expired"
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the suppression setting (Enabled, Disabled, Expired)"
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for suppressing this alert"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Any comment regarding the suppression"
+        },
+        "suppressionScope": { //discus
+          "type": "object",
+          "description": "Suppression scope",
+          "$ref": "#/definitions/SuppressionScopeRule"
+        }
+      }
+    },
+    "SuppressionScopeRule": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Changing set of properties depending on the alert type",
+      "properties": {
+        "if": {
+          "type": "object",
+          "description": "conditions to apply suppression",
+          "properties": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/Item"
+              }
+            ]
+          }
+        },
+        "then": {
+          "type": "object",
+          "description": "Suppress alert",
+          "properties": {
+            "effect": {
+              "type": "string",
+              "description": "Deny - suppress the alert"
+            }
+          }
+        }
+      }
+    },
+    // check this
+    "Item": {
+      "description": "The key value pair for properties.",
+      "type": "object",
+      "properties": {
+        "field": {
+          "description": "CompromisedEntites",
+          "type": "string"
+        },
+        "in": {
+          "description": "Array of CompromisedEntites to look in",
+          "type": "array"
+        }
+      }
+    }
+    //another item for ip,anyof-cmd
+  },
+  "parameters": {
+    "AlertSuppressionSettingName": {
+      "name": "alertSuppressionSettingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique name of the alert suppression setting",
+      "x-ms-parameter-location": "method" //x-ms-parameter-location - provides a mechanism to specify that the global parameter is actually a parameter on the operation and not a client property.
+    },
+    "AlertSuppressionSetting": {
+      "name": "alertSuppressionSetting",
+      "in": "body",
+      "required": true,
+      "description": "AlertSuppressionSetting object",
+      "schema": {
+        "$ref": "#/definitions/AlertSuppressionSetting"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

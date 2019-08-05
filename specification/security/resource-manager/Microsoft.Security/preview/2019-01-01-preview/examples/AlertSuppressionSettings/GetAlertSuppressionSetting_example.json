@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "AlertSuppressionSettingName": "suppressIpAnomalyAlerts"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertSuppressionSettings/suppressIpAnomalyAlerts",
+        "name": "suppressIpAnomalyAlerts",
+        "type": "Microsoft.Security/alertSuppressionSettings",
+        "properties": {
+          "alertType": "IpAnomaly",
+          "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
+          "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
+          "state": "Enabled",
+          "reason": "Too many similar alerts",
+          "comment": "",
+          "suppressionScope": {
+            "if": {
+              "allOf": [
+                {
+                  "field": "CompromisedEntities",
+                  "in": [ "GOAZBBApp2", "demoAccount@microsoft.com" ]
+                },
+                {
+                  "field": "entities.ip.address",
+                  "in": [ "80.77.0.5", "180.222.6.6" ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "field": "entities.process.commandline",
+                      "contains": "GOOGLEUPDATE.EXE"
+                    },
+                    {
+                      "field": "entities.process.commandline",
+                      "contains": "CMD.EXE"
+                    }
+                  ]
+                }
+              ]
+            },
+            "then": {
+              "effect": "Deny"
+            }
+          }
+        }
+      }
+    }
+  }
+}

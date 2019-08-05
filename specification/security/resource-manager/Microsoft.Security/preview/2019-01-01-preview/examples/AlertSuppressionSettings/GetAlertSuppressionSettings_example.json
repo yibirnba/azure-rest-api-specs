@@ -1,0 +1,143 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertSuppressionSettings/suppressIpAnomalyAlerts",
+            "name": "suppressIpAnomalyAlerts",
+            "type": "Microsoft.Security/alertSuppressionSettings",
+            "properties": {
+              "alertType": "IpAnomaly",
+              "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
+              "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
+              "state": "Enabled",
+              "reason": "Too many similar alerts",
+              "comment": "",
+              "suppressionScope": {
+                "if": {
+                  "allOf": [
+                    {
+                      "field": "CompromisedEntities",
+                      "in": [ "GOAZBBApp2", "demoAccount@microsoft.com" ]
+                    },
+                    {
+                      "field": "entities.ip.address",
+                      "in": [ "80.77.0.5", "180.222.6.6" ]
+                    },
+                    {
+                      "anyOf": [
+                        {
+                          "field": "entities.process.commandline",
+                          "contains": "GOOGLEUPDATE.EXE"
+                        },
+                        {
+                          "field": "entities.process.commandline",
+                          "contains": "CMD.EXE"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "then": {
+                  "effect": "Deny"
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertSuppressionSettings/suppressIpAnomalyAlertsOnTestVMs",
+            "name": "suppressIpAnomalyAlertsOnTestVMs",
+            "type": "Microsoft.Security/alertSuppressionSettings",
+            "properties": {
+              "alertType": "IpAnomaly",
+              "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
+              "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
+              "state": "Enabled",
+              "reason": "Not needed in tests VMs",
+              "comment": "",
+              "suppressionScope": {
+                "if": {
+                  "allOf": [
+                    {
+                      "field": "CompromisedEntities",
+                      "in": [ "GOAZBBApp2", "demoAccount@microsoft.com" ]
+                    },
+                    {
+                      "anyOf": [
+                        {
+                          "field": "entities.process.commandline",
+                          "contains": "GOOGLEUPDATE.EXE"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "then": {
+                  "effect": "Deny"
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertSuppressionSettings/suppressSSH_BF_Failed",
+            "name": "suppressSSH_BF_Failed",
+            "type": "Microsoft.Security/alertSuppressionSettings",
+            "properties": {
+              "alertType": "SSH_BF_Failed",
+              "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
+              "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
+              "state": "Disabled",
+              "reason": "Not relevant for my environment",
+              "comment": "Suppress for all the resources until finish testing",
+              "suppressionScope": {
+                "if": {
+                  "allOf": [
+                  ]
+                },
+                "then": {
+                  "effect": "Deny"
+                }
+              }
+
+            }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertSuppressionSettings/suppressAntimalwareActionFailed",
+            "name": "suppressAntimalwareActionFailed",
+            "type": "Microsoft.Security/alertSuppressionSettings",
+            "properties": {
+              "alertType": "AntimalwareActionFailed",
+              "lastModifiedUTC": "2019-07-31T19:50:46.083632Z",
+              "expirationDateUTC": "2019-07-31T19:50:47.083633Z",
+              "state": "Expired",
+              "reason": "Not relevant for my environment",
+              "suppressionScope": {
+                "if": {
+                  "allOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "field": "entities.process.commandline",
+                          "contains": "GOOGLEUPDATE.EXE"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "then": {
+                  "effect": "Deny"
+                }
+              }
+
+            }
+          }
+        ]
+      }
+    }
+  }
+}
