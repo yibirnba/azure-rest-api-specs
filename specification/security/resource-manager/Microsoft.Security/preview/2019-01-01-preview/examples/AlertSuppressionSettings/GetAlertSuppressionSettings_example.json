@@ -17,7 +17,7 @@
               "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
               "state": "Enabled",
               "reason": "Too many similar alerts",
-              "comment": "",
+              "comment": "Very noisy",
               "suppressionScope": {
                 "if": {
                   "allOf": [
@@ -33,7 +33,7 @@
                       "anyOf": [
                         {
                           "field": "entities.process.commandline",
-                          "contains": "GOOGLEUPDATE.EXE"
+                          "contains": "POWERSHELL.EXE"
                         },
                         {
                           "field": "entities.process.commandline",
@@ -58,82 +58,7 @@
               "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
               "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
               "state": "Enabled",
-              "reason": "Not needed in tests VMs",
-              "comment": "",
-              "suppressionScope": {
-                "if": {
-                  "allOf": [
-                    {
-                      "field": "CompromisedEntities",
-                      "in": [ "GOAZBBApp2", "demoAccount@microsoft.com" ]
-                    },
-                    {
-                      "anyOf": [
-                        {
-                          "field": "entities.process.commandline",
-                          "contains": "GOOGLEUPDATE.EXE"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "then": {
-                  "effect": "Deny"
-                }
-              }
-            }
-          },
-          {
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertSuppressionSettings/suppressSSH_BF_Failed",
-            "name": "suppressSSH_BF_Failed",
-            "type": "Microsoft.Security/alertSuppressionSettings",
-            "properties": {
-              "alertType": "SSH_BF_Failed",
-              "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
-              "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
-              "state": "Disabled",
-              "reason": "Not relevant for my environment",
-              "comment": "Suppress for all the resources until finish testing",
-              "suppressionScope": {
-                "if": {
-                  "allOf": [
-                  ]
-                },
-                "then": {
-                  "effect": "Deny"
-                }
-              }
-
-            }
-          },
-          {
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertSuppressionSettings/suppressAntimalwareActionFailed",
-            "name": "suppressAntimalwareActionFailed",
-            "type": "Microsoft.Security/alertSuppressionSettings",
-            "properties": {
-              "alertType": "AntimalwareActionFailed",
-              "lastModifiedUTC": "2019-07-31T19:50:46.083632Z",
-              "expirationDateUTC": "2019-07-31T19:50:47.083633Z",
-              "state": "Expired",
-              "reason": "Not relevant for my environment",
-              "suppressionScope": {
-                "if": {
-                  "allOf": [
-                    {
-                      "anyOf": [
-                        {
-                          "field": "entities.process.commandline",
-                          "contains": "GOOGLEUPDATE.EXE"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "then": {
-                  "effect": "Deny"
-                }
-              }
-
+              "reason": "Not needed in tests VMs"
             }
           }
         ]

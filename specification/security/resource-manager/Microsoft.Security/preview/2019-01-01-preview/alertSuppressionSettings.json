@@ -270,17 +270,19 @@
       "properties": {
         "if": {
           "type": "object",
+          "required": true,
           "description": "conditions to apply suppression",
           "properties": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/Item"
-              }
-            ]
+            "all_Of": {
+              "type": "object",
+              "required": true,
+              "description": "Suppression scope"
+            }
           }
         },
         "then": {
           "type": "object",
+          "required": true,
           "description": "Suppress alert",
           "properties": {
             "effect": {
@@ -291,7 +293,7 @@
         }
       }
     },
-    "Item": {
+    "Item1": {
       "description": "The key value pair for properties.",
       "type": "object",
       "properties": {
