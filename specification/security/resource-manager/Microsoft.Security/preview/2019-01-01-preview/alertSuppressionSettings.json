@@ -259,11 +259,11 @@
         "suppressionScope": { 
           "type": "object",
           "description": "Suppression scope",
-          "$ref": "#/definitions/SuppressionScopeRule"
+          "$ref": "#/definitions/SuppressionSettingScope"
         }
       }
     },
-    "SuppressionScopeRule": {
+    "SuppressionSettingScope": {
       "type": "object",
       "description": "Changing set of properties depending on the alert type",
       "required": true,
@@ -273,10 +273,16 @@
           "required": true,
           "description": "conditions to apply suppression",
           "properties": {
-            "all_Of": {
-              "type": "object",
+            "allOf": {
+              "type": "array",
               "required": true,
-              "description": "Suppression scope"
+              "description": "All of the items inside need to happen in order to suppress the alert",
+              "items": {
+                "anyOf": [
+                  {"$ref": "#/definitions/FieldIn"},
+                  {"$ref": "#/definitions/AnyOf"}
+                ]   
+              }
             }
           }
         },
@@ -287,25 +293,114 @@
           "properties": {
             "effect": {
               "type": "string",
-              "description": "Deny - suppress the alert"
+              "description": "Deny - suppress the alert",
+              "enum": [
+                "Deny"
+              ]
             }
           }
         }
       }
     },
-    "Item1": {
-      "description": "The key value pair for properties.",
+    "AnyOf": {
+      "type": "array",
+      "description": "Items for cmd",
+      "items": {
+        "$ref": "#/definitions/FieldContains"
+      }
+    },
+    "FieldIn": {
       "type": "object",
+      "description": "Items for suppress",
+      "discriminator": "fieldIn",
       "properties": {
         "field": {
-          "description": "CompromisedEntities",
+          "readOnly": true,
           "type": "string",
-          "required": true
-        },
+          "description": "suppression field",
+          "enum": ["CompromisedEntities", "entities.ip.address"],
+          "x-ms-enum": {
+            "name": "field",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CompromisedEntities"
+              },
+              {
+                "value": "entities.ip.address"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "FieldContains": {
+      "type": "object",
+      "description": "Items for suppress",
+      "discriminator": "fieldContains",
+      "properties": {
+        "field": {
+          "readOnly": true,
+          "type": "string",
+          "description": "suppression field",
+          "enum": ["entities.process.commandline"],
+          "x-ms-enum": {
+            "name": "field",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "entities.process.commandline"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "CompromisedEntitiesProperties": {
+      "type": "object",
+      "description": "CompromisedEntities field",
+      "x-ms-discriminator-value": "CompromisedEntities",
+      "allOf": [{
+        "$ref": "#/definitions/FieldIn"
+      }],
+      "properties": {
         "in": {
-          "description": "Array of CompromisedEntities to look in",
           "type": "array",
-          "required": true
+          "description": "comp entities array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+	  "IpProperties": {
+      "type": "object",
+      "description": "Ip field",
+      "x-ms-discriminator-value": "entities.ip.address",
+      "allOf": [{
+        "$ref": "#/definitions/FieldIn"
+      }],
+      "properties": {
+        "in": {
+          "type": "array",
+          "description": "ip entities array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CMDProperties": {
+      "type": "object",
+      "description": "Ip field",
+      "x-ms-discriminator-value": "entities.process.commandline",
+      "allOf": [{
+        "$ref": "#/definitions/FieldContains"
+      }],
+      "properties": {
+        "contains": {
+          "type": "string",
+          "description": "cmd entities array"
         }
       }
     }

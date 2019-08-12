@@ -9,34 +9,33 @@
       "type": "Microsoft.Security/alertSuppressionSettings",
       "properties": {
         "alertType": "IpAnomaly",
-        "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
         "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
         "state": "Enabled",
-        "reason": "Too many similar alerts",
-        "comment": "",
+        "reason": "Detects a normal activity (False Positive)",
+        "comment": "Test VM",
         "suppressionScope": {
           "if": {
             "allOf": [
+            {
+              "field": "CompromisedEntities",
+              "in": [ "ContosoVM1", "demoAccount@microsoft.com" ]
+            },
+            {
+              "field": "entities.ip.address",
+              "in": [ "104.215.95.187", "52.164.206.56" ]
+            },
+            {
+              "anyOf": [
               {
-                "field": "CompromisedEntities",
-                "in": [ "GOAZBBApp2", "demoAccount@microsoft.com" ]
+                "field": "entities.process.commandline",
+                "contains": "POWERSHELL.EXE"
               },
               {
-                "field": "entities.ip.address",
-                "in": [ "80.77.0.5", "180.222.6.6" ]
-              },
-              {
-                "anyOf": [
-                  {
-                    "field": "entities.process.commandline",
-                    "contains": "GOOGLEUPDATE.EXE"
-                  },
-                  {
-                    "field": "entities.process.commandline",
-                    "contains": "CMD.EXE"
-                  }
-                ]
+                "field": "entities.process.commandline",
+                "contains": "CMD.EXE"
               }
+              ]
+            }
             ]
           },
           "then": {
@@ -44,48 +43,48 @@
           }
         }
       }
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertSuppressionSettings/suppressIpAnomalyAlerts",
-          "name": "suppressIpAnomalyAlerts",
-          "type": "Microsoft.Security/alertSuppressionSettings",
-          "properties": {
-            "alertType": "IpAnomaly",
-            "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
-            "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
-            "state": "Enabled",
-            "reason": "Too many similar alerts",
-            "comment": "",
-            "suppressionScope": {
-              "if": {
-                "allOf": [
-                  {
-                    "field": "CompromisedEntities",
-                    "in": [ "GOAZBBApp2", "demoAccount@microsoft.com" ]
-                  },
-                  {
-                    "field": "entities.ip.address",
-                    "in": [ "80.77.0.5", "180.222.6.6" ]
-                  },
-                  {
-                    "anyOf": [
-                      {
-                        "field": "entities.process.commandline",
-                        "contains": "GOOGLEUPDATE.EXE"
-                      },
-                      {
-                        "field": "entities.process.commandline",
-                        "contains": "CMD.EXE"
-                      }
-                    ]
-                  }
-                ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertSuppressionSettings/suppressIpAnomalyAlerts",
+        "name": "suppressIpAnomalyAlerts",
+        "type": "Microsoft.Security/alertSuppressionSettings",
+        "properties": {
+          "alertType": "IpAnomaly",
+          "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
+          "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
+          "state": "Enabled",
+          "reason": "Detects a normal activity (False Positive)",
+          "comment": "Test VM",
+          "suppressionScope": {
+            "if": {
+              "allOf": [
+              {
+                "field": "CompromisedEntities",
+                "in": [ "ContosoVM1", "demoAccount@microsoft.com" ]
               },
-              "then": {
-                "effect": "Deny"
+              {
+                "field": "entities.ip.address",
+                "in": [ "104.215.95.187", "52.164.206.56" ]
+              },
+              {
+                "anyOf": [
+                {
+                  "field": "entities.process.commandline",
+                  "contains": "POWERSHELL.EXE"
+                },
+                {
+                  "field": "entities.process.commandline",
+                  "contains": "CMD.EXE"
+                }
+                ]
               }
+              ]
+            },
+            "then": {
+              "effect": "Deny"
             }
           }
         }
