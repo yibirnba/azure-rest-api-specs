@@ -44,7 +44,7 @@
         "tags": [
           "AutoDismissRules"
         ],
-        "description": "List of all the dismiss rules for the given subscription. When adding AlertType parameter, the list will include rules for this specific AlertType",
+        "description": "List of all the dismiss rules for the given subscription",
         "operationId": "AutoDismissRules_List",
         "parameters": [
           {
@@ -123,7 +123,7 @@
         "tags": [
           "AutoDismissRules"
         ],
-        "description": "update existing rule or create new rule if not exist",
+        "description": "Update existing rule or create new rule if not exist",
         "operationId": "AutoDismissRules_Update",
         "parameters": [
           {
@@ -137,13 +137,16 @@
           },
           {
             "$ref": "#/parameters/AutoDismissRule"
+          },
+          {
+            "$ref": "#/parameters/TestRule"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutoDismissRule"
+              "$ref": "#/definitions/PutResponse"
             }
           },
           "default": {
@@ -264,7 +267,7 @@
         },
         "autoDismissScope": {
           "type": "object",
-          "description": "Auto dismiss scope",
+          "description": "The auto dismiss conditions",
           "$ref": "#/definitions/AutoDismissScope"
         }
       },
@@ -277,39 +280,41 @@
     },
     "AutoDismissScope": {
       "type": "object",
-      "description": "Changing set of properties depending on the alert type",
       "properties": {
         "allOf": {
           "type": "array",
-          "description": "All of the items inside need to happen in order to auto dismiss the alert",
+          "description": "All the conditions inside need to be true in order to auto dismiss the alert",
           "items": {
             "$ref": "#/definitions/Field"
           }
         }
-      }
+      },
+      "required": [
+        "allOf"
+      ]
     },
     "Field": {
       "type": "object",
       "x-abstract": true,
-      "additionalProperties": false,
       "properties": {
         "field": {
           "type": "string"
          }
-      }
+      },
+      "required": [
+        "field"
+      ]
     },
     "FieldIn": {
       "type": "object",
-      "description": "Items for dismiss",
+      "description": "Alerts with the property in the 'field', that are in the 'in' list, will be dismissed",
       "x-abstract": false,
-      "additionalProperties": false,
       "x-inherits": "#/definitions/Field",
       "properties": {
         "field": {
           "type": "string"
         },
         "in": {
-          "description": "comp entities array",
           "type": "array",
           "items": {
             "type": "string"
@@ -323,23 +328,40 @@
     },
     "FieldContains": {
       "type": "object",
-      "description": "Items for dismiss",
+      "description": "Alerts with the property in the 'field', that its value contains the string in 'contains', will be dismissed",
       "x-abstract": false,
-      "additionalProperties": false,
       "x-inherits": "#/definitions/Field",
       "properties": {
         "field": {
           "type": "string"
         },
         "contains": {
-          "type": "string",
-          "description": "comp"
+          "type": "string"
         }
       },
       "required": [
         "field",
         "contains"
       ]
+    },
+    "PutResponse": {
+      "type": "object",
+      "properties": {
+        "autoDismissRule": {
+          "$ref": "#/definitions/AutoDismissRule"
+        },
+        "ruleImpact": {
+          "type": "object",
+          "properties": {
+            "scannedAlertsNumber" : {
+              "type": "integer"
+            },
+            "dismissedAlertsNumber" : {
+              "type": "integer"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -347,7 +369,14 @@
       "name": "AlertType",
       "in": "query",
       "type": "string",
-      "description": "Alert type to get all rules for",
+      "description": "The type of the alert to get rules for",
+      "x-ms-parameter-location": "method"
+    },
+    "TestRule": {
+      "name": "TestRule",
+      "in": "query",
+      "type": "boolean",
+      "description": "The type of the alert to get rules for",
       "x-ms-parameter-location": "method"
     },
     "AutoDismissRuleName": {
