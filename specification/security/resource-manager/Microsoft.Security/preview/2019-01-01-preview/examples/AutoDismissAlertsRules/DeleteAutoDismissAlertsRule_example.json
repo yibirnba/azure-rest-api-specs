@@ -5,7 +5,6 @@
 	  "autoDismissAlertsRuleName": "dismissIpAnomalyAlerts"
   },
   "responses": {
-	"200": {},
-	"204": {}
+	"200": {}
   }
 }
