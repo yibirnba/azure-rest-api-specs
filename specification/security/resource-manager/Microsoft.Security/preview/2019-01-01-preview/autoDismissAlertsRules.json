@@ -240,12 +240,10 @@
         "lastModified": {
           "readOnly": true,
           "type": "string",
-          "format": "date-time",
           "description": "The last time this rule was modified"
         },
         "expirationDate": {
           "type": "string",
-          "format": "date-time",
           "description": "Expiration date of the rule"
         },
         "reason": {
