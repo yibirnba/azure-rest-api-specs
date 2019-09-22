@@ -4,9 +4,9 @@
     "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
     "autoDismissRuleName": "dismissIpAnomalyAlerts",
     "autoDismissRule": {
-      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/autoDismissRules/dismissIpAnomalyAlerts",
+      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/autoDismissAlertsRules/dismissIpAnomalyAlerts",
       "name": "dismissIpAnomalyAlerts",
-      "type": "Microsoft.Security/autoDismissRules",
+      "type": "Microsoft.Security/autoDismissAlertsRules",
       "properties": {
         "alertType": "IpAnomaly",
         "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
@@ -14,7 +14,7 @@
         "state": "Enabled",
         "reason": "Detects a normal activity (False Positive)",
         "comment": "Test VM",
-        "autoDismissScope": {
+        "autoDismissAlertsScope": {
           "allOf": [
             {
               "field": "CompromisedEntities",
@@ -37,9 +37,9 @@
     "200": {
       "body": {
         "autoDismissRule": {
-          "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/autoDismissRules/dismissIpAnomalyAlerts",
+          "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/autoDismissAlertsRules/dismissIpAnomalyAlerts",
           "name": "dismissIpAnomalyAlerts",
-          "type": "Microsoft.Security/autoDismissRules",
+          "type": "Microsoft.Security/autoDismissAlertsRules",
           "properties": {
             "alertType": "IpAnomaly",
             "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
@@ -47,7 +47,7 @@
             "state": "Enabled",
             "reason": "Detects a normal activity (False Positive)",
             "comment": "Test VM",
-            "autoDismissScope": {
+            "autoDismissAlertsScope": {
               "allOf": [
                 {
                   "field": "CompromisedEntities",

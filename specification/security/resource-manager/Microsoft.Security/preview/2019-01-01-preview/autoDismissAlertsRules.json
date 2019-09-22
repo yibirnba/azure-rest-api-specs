@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoDismissRules": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoDismissAlertsRules": {
       "get": {
         "x-ms-examples": {
           "Get auto dismiss rules for subscription": {
-            "$ref": "./examples/AutoDismissRules/GetAutoDismissRules_example.json"
+            "$ref": "./examples/AutoDismissAlertsRules/GetAutoDismissAlertsRules_example.json"
           }
         },
         "tags": [
-          "AutoDismissRules"
+          "AutoDismissAlertsRules"
         ],
         "description": "List of all the dismiss rules for the given subscription",
-        "operationId": "AutoDismissRules_List",
+        "operationId": "AutoDismissAlertsRules_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -61,7 +61,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutoDismissRulesList"
+              "$ref": "#/definitions/AutoDismissAlertsRulesList"
             }
           },
           "default": {
@@ -76,18 +76,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoDismissRules/{autoDismissRuleName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoDismissAlertsRules/{autoDismissAlertsRuleName}": {
       "get": {
         "x-ms-examples": {
           "Get auto dismiss alert rule for subscription": {
-            "$ref": "./examples/AutoDismissRules/GetAutoDismissRules_example.json"
+            "$ref": "./examples/AutoDismissAlertsRules/GetAutoDismissAlertsRule_example.json"
           }
         },
         "tags": [
-          "AutoDismissRules"
+          "AutoDismissAlertsRules"
         ],
-        "description": "Get dismiss rule, with name: {autoDismissRuleName}, for the given subscription",
-        "operationId": "AutoDismissRules_Get",
+        "description": "Get dismiss rule, with name: {autoDismissAlertsRuleName}, for the given subscription",
+        "operationId": "AutoDismissAlertsRules_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -96,14 +96,14 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/AutoDismissRuleName"
+            "$ref": "#/parameters/AutoDismissAlertsRuleName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutoDismissRule"
+              "$ref": "#/definitions/AutoDismissAlertsRule"
             }
           },
           "default": {
@@ -117,14 +117,14 @@
       "put": {
         "x-ms-examples": {
           "Update or create auto dismiss rule for subscription": {
-            "$ref": "./examples/AutoDismissRules/PutAutoDismissRule_example.json"
+            "$ref": "./examples/AutoDismissAlertsRules/PutAutoDismissAlertsRule_example.json"
           }
         },
         "tags": [
-          "AutoDismissRules"
+          "AutoDismissAlertsRules"
         ],
         "description": "Update existing rule or create new rule if not exist",
-        "operationId": "AutoDismissRules_Update",
+        "operationId": "AutoDismissAlertsRules_Update",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -133,10 +133,10 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/AutoDismissRuleName"
+            "$ref": "#/parameters/AutoDismissAlertsRuleName"
           },
           {
-            "$ref": "#/parameters/AutoDismissRule"
+            "$ref": "#/parameters/AutoDismissAlertsRule"
           },
           {
             "$ref": "#/parameters/TestRule"
@@ -160,14 +160,14 @@
       "delete": {
         "x-ms-examples": {
           "Delete auto dismiss rule data for a subscription": {
-            "$ref": "./examples/AutoDismissRules/DeleteAutoDismissRule_example.json"
+            "$ref": "./examples/AutoDismissAlertsRules/DeleteAutoDismissAlertsRule_example.json"
           }
         },
         "tags": [
-          "AutoDismissRules"
+          "AutoDismissAlertsRules"
         ],
         "description": "Delete dismiss alert rule for this subscription.",
-        "operationId": "AutoDismissRules_Delete",
+        "operationId": "AutoDismissAlertsRules_Delete",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -176,7 +176,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/AutoDismissRuleName"
+            "$ref": "#/parameters/AutoDismissAlertsRuleName"
           }
         ],
         "responses": {
@@ -194,14 +194,14 @@
     }
   },
   "definitions": {
-    "AutoDismissRulesList": {
+    "AutoDismissAlertsRulesList": {
       "type": "object",
       "description": "Auto dismiss rules list for subscription.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AutoDismissRule"
+            "$ref": "#/definitions/AutoDismissAlertsRule"
           }
         },
         "nextLink": {
@@ -211,13 +211,13 @@
         }
       }
     },
-    "AutoDismissRule": {
+    "AutoDismissAlertsRule": {
       "type": "object",
       "description": "Describes the auto dismiss rule",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AutoDismissRuleProperties"
+          "$ref": "#/definitions/AutoDismissAlertsRuleProperties"
         }
       },
       "allOf": [
@@ -226,9 +226,9 @@
         }
       ]
     },
-    "AutoDismissRuleProperties": {
+    "AutoDismissAlertsRuleProperties": {
       "type": "object",
-      "description": "describes AutoDismissRule properties",
+      "description": "describes AutoDismissAlertsRule properties",
       "properties": {
         "alertType": {
           "type": "string",
@@ -265,20 +265,19 @@
           "type": "string",
           "description": "Any comment regarding the rule"
         },
-        "autoDismissScope": {
+        "autoDismissAlertsScope": {
           "type": "object",
           "description": "The auto dismiss conditions",
-          "$ref": "#/definitions/AutoDismissScope"
+          "$ref": "#/definitions/AutoDismissAlertsScope"
         }
       },
       "required": [
         "alertType",
-        "expirationDate",
         "reason",
         "state"
       ]
     },
-    "AutoDismissScope": {
+    "AutoDismissAlertsScope": {
       "type": "object",
       "properties": {
         "allOf": {
@@ -347,8 +346,8 @@
     "PutResponse": {
       "type": "object",
       "properties": {
-        "autoDismissRule": {
-          "$ref": "#/definitions/AutoDismissRule"
+        "autoDismissAlertsRule": {
+          "$ref": "#/definitions/AutoDismissAlertsRule"
         },
         "ruleImpact": {
           "type": "object",
@@ -379,21 +378,21 @@
       "description": "The type of the alert to get rules for",
       "x-ms-parameter-location": "method"
     },
-    "AutoDismissRuleName": {
-      "name": "autoDismissRuleName",
+    "AutoDismissAlertsRuleName": {
+      "name": "autoDismissAlertsRuleName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The unique name of the auto dismiss alert rule",
       "x-ms-parameter-location": "method" 
     },
-    "AutoDismissRule": {
-      "name": "autoDismissRule",
+    "AutoDismissAlertsRule": {
+      "name": "autoDismissAlertsRule",
       "in": "body",
       "required": true,
       "description": "Auto dismiss rule object",
       "schema": {
-        "$ref": "#/definitions/AutoDismissRule"
+        "$ref": "#/definitions/AutoDismissAlertsRule"
       },
       "x-ms-parameter-location": "method"
     }
