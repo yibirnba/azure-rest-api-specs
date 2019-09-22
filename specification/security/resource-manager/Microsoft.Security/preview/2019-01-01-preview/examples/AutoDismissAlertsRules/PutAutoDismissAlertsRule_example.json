@@ -2,8 +2,8 @@
   "parameters": {
     "api-version": "2019-01-01-preview",
     "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "autoDismissRuleName": "dismissIpAnomalyAlerts",
-    "autoDismissRule": {
+    "autoDismissAlertsRuleName": "dismissIpAnomalyAlerts",
+    "autoDismissAlertsRule": {
       "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/autoDismissAlertsRules/dismissIpAnomalyAlerts",
       "name": "dismissIpAnomalyAlerts",
       "type": "Microsoft.Security/autoDismissAlertsRules",
@@ -36,7 +36,7 @@
   "responses": {
     "200": {
       "body": {
-        "autoDismissRule": {
+        "autoDismissAlertsRule": {
           "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/autoDismissAlertsRules/dismissIpAnomalyAlerts",
           "name": "dismissIpAnomalyAlerts",
           "type": "Microsoft.Security/autoDismissAlertsRules",

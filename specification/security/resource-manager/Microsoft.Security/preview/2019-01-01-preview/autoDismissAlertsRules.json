@@ -209,7 +209,10 @@
           "type": "string",
           "description": "The URI to fetch the next page."
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "AutoDismissAlertsRule": {
       "type": "object",
