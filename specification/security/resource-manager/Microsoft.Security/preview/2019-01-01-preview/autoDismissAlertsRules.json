@@ -237,13 +237,15 @@
           "type": "string",
           "description": "Type of the auto dismissed alert. For all alert types, use '*'"
         },
-        "lastModified": {
+        "lastModifiedUTC": {
           "readOnly": true,
           "type": "string",
+          "format": "date-time",
           "description": "The last time this rule was modified"
         },
-        "expirationDate": {
+        "expirationDateUTC": {
           "type": "string",
+          "format": "date-time",
           "description": "Expiration date of the rule"
         },
         "reason": {
