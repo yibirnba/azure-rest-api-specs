@@ -272,6 +272,12 @@
           "type": "object",
           "description": "The auto dismiss conditions",
           "$ref": "#/definitions/AutoDismissAlertsScope"
+        },
+        "RuleImpact": {
+          "type": "object",
+          "description": "The impact of the rule. Use for testing the rule and will be returned only when the test flag is set",
+          "readOnly": true,
+          "$ref": "#/definitions/RuleImpact"
         }
       },
       "required": [
