@@ -293,6 +293,7 @@
           "type": "array",
           "description": "All the conditions inside need to be true in order to auto dismiss the alert",
           "items": {
+            "$ref": "#/definitions/Field"
           }
         }
       },
@@ -353,6 +354,10 @@
     },
     "RuleImpact": {
       "type": "object",
+      "required": [
+        "scannedAlertsNumber",
+        "dismissedAlertsNumber"
+      ],
       "properties": {
         "scannedAlertsNumber" : {
           "type": "integer"
