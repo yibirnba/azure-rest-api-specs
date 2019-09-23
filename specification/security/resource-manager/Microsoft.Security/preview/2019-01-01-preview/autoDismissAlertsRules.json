@@ -118,6 +118,9 @@
         "x-ms-examples": {
           "Update or create auto dismiss rule for subscription": {
             "$ref": "./examples/AutoDismissAlertsRules/PutAutoDismissAlertsRule_example.json"
+          },
+          "Test a rule for subscription": {
+            "$ref": "./examples/AutoDismissAlertsRules/PutAutoDismissAlertsRuleTest_example.json"
           }
         },
         "tags": [
