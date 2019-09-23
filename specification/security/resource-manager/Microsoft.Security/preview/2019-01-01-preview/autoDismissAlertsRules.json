@@ -146,8 +146,15 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PutResponse"
-            }
+              "allOf": [
+                  {
+                      "$ref": "#/definitions/AutoDismissAlertsRule"
+                  },
+                  {
+                      "$ref": "#/definitions/ruleImpact"
+                  }
+              ]
+          }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -344,22 +351,14 @@
         "contains"
       ]
     },
-    "PutResponse": {
+    "ruleImpact": {
       "type": "object",
       "properties": {
-        "autoDismissAlertsRule": {
-          "$ref": "#/definitions/AutoDismissAlertsRule"
+        "scannedAlertsNumber" : {
+          "type": "integer"
         },
-        "ruleImpact": {
-          "type": "object",
-          "properties": {
-            "scannedAlertsNumber" : {
-              "type": "integer"
-            },
-            "dismissedAlertsNumber" : {
-              "type": "integer"
-            }
-          }
+        "dismissedAlertsNumber" : {
+          "type": "integer"
         }
       }
     }
