@@ -154,7 +154,7 @@
                       "$ref": "#/definitions/ruleImpact"
                   }
               ]
-          }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -293,7 +293,8 @@
         "allOf": {
           "type": "array",
           "description": "All the conditions inside need to be true in order to auto dismiss the alert",
-          "items": {}
+          "items": {
+          }
         }
       },
       "required": [
