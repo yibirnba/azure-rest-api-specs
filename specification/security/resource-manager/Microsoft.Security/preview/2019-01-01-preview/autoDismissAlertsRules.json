@@ -146,14 +146,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "allOf": [
-                  {
-                      "$ref": "#/definitions/AutoDismissAlertsRule"
-                  },
-                  {
-                      "$ref": "#/definitions/ruleImpact"
-                  }
-              ]
+              "$ref": "#/definitions/AutoDismissAlertsRule"
             }
           },
           "default": {
@@ -352,7 +345,7 @@
         "contains"
       ]
     },
-    "ruleImpact": {
+    "RuleImpact": {
       "type": "object",
       "properties": {
         "scannedAlertsNumber" : {
