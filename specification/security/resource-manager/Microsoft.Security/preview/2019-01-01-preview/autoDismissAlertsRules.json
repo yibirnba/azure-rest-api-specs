@@ -276,7 +276,7 @@
           "description": "The auto dismiss conditions",
           "$ref": "#/definitions/AutoDismissAlertsScope"
         },
-        "RuleImpact": {
+        "ruleImpact": {
           "type": "object",
           "description": "The impact of the rule. Use for testing the rule and will be returned only when the test flag is set",
           "readOnly": true,
@@ -295,9 +295,7 @@
         "allOf": {
           "type": "array",
           "description": "All the conditions inside need to be true in order to auto dismiss the alert",
-          "items": {
-            "$ref": "#/definitions/Field"
-          }
+          "items": {}
         }
       },
       "required": [
