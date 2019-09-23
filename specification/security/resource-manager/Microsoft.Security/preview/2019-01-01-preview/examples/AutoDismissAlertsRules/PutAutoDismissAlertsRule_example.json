@@ -62,9 +62,7 @@
               }
             ]
           }
-        },
-        "scannedAlertsNumber": 0,
-        "dismissedAlertsNumber": 0
+        }
       }
     }
   }
